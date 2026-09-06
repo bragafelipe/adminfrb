@@ -9,6 +9,8 @@ on:
     types: [created, edited]
   schedule: weekly
   workflow_dispatch:
+# NOTE: `issue_comment` fires for both issue and PR comments on GitHub. The `if:` guard
+# below is what excludes PR comments; keep the trigger and this guard in sync if either changes.
 if: github.event_name != 'issue_comment' || github.event.issue.pull_request == null
 permissions:
   contents: read
@@ -88,7 +90,7 @@ Nunca remova labels de domínio (que não estejam nesta lista) sem justificativa
 6. **Se houver dependência em aberto**: aplique `status:blocked`, remova `status:ready-for-copilot` se estiver presente, e explique claramente qual dependência falta e por quê ela bloqueia o trabalho.
 7. **Se a issue estiver completa**: objetivo claro, escopo pequeno o suficiente para uma única entrega/PR, sem dependências abertas, e com critérios de aceite testáveis — aplique `status:ready-for-copilot` (e remova `status:needs-details`, `status:needs-approval` e `status:blocked` se estiverem presentes).
 8. **Caso contrário**: aplique `status:needs-details` (faltam informações) ou `status:needs-approval` (a issue está completa o bastante para entender, mas você está sugerindo uma mudança de escopo, divisão em issues menores, ou outra decisão que exige aprovação humana antes de prosseguir).
-9. **Evite ruído**: antes de comentar, verifique os comentários e o histórico de labels já existentes na issue. Se não houve nenhuma mudança material desde a sua última revisão (mesmo entendimento, mesmas dependências, mesmo status), não publique um novo comentário nem repita labels que já estão corretos. `noop` é o resultado esperado nesse caso.
+9. **Evite ruído**: antes de comentar, procure seu próprio comentário de revisão mais recente na issue (o safe output `add_comment` insere um marcador oculto de rastreamento em cada comentário que publica) e compare o estado atual (labels, corpo, comentários novos) com o que foi registrado nele. Se não houve nenhuma mudança material desde então (mesmo entendimento, mesmas dependências, mesmo status), não publique um novo comentário nem repita labels que já estão corretos. `noop` é o resultado esperado nesse caso.
 
 ## Revisão periódica (execução semanal)
 
