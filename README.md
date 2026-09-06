@@ -47,6 +47,12 @@ As variáveis agrupam cores, tipografia, espaçamentos, raios, sombras e
 dimensões de layout. Para aplicar uma identidade visual, altere os valores
 nesse arquivo em vez de substituir valores nos componentes.
 
+## Configuração White-label
+
+A aplicação possui arquitetura white-label tipada (`ClientConfig`) para personalização de marca, logotipo, favicon, cores de tema, navegação e canais de suporte sem necessidade de modificar componentes compartilhados.
+
+Consulte os detalhes e guias em [`docs/configuration.md`](docs/configuration.md).
+
 ## Variáveis de ambiente
 
 Copie `.env.example` para `.env.local` e ajuste os valores para o ambiente local. O arquivo de exemplo não contém credenciais.
