@@ -1,0 +1,51 @@
+.dashboard {
+  display: grid;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+
+.dashboard__header h1 {
+  margin: 0.5rem 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.dashboard__eyebrow {
+  margin: 0;
+  color: #4968d8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard__description {
+  margin: 0;
+  color: #5d687d;
+  font-size: 1.1rem;
+}
+
+.dashboard__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #e0e6f0;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 0.75rem 2rem rgb(41 56 87 / 8%);
+}
+
+.dashboard__card p {
+  margin: 0.35rem 0 0;
+  color: #5d687d;
+}
+
+.dashboard__status {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #23a56a;
+  box-shadow: 0 0 0 0.3rem #dff5eb;
+}
