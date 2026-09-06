@@ -29,6 +29,7 @@ safe-outputs:
     max: 1
     target: "*"
   add-labels:
+    create-if-missing: true
     allowed:
       - status:needs-details
       - status:needs-approval
