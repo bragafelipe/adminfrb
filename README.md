@@ -35,6 +35,18 @@ npm run validate
 
 O alias `@/*` aponta para `src/*`, permitindo imports como `@/app/App`.
 
+## Tokens visuais
+
+Os tokens ficam em `src/styles/tokens.css` e são consumidos pelos estilos dos
+componentes via variáveis CSS. O tema padrão é claro e neutro; o tema escuro
+é ativado automaticamente pela preferência do sistema ou explicitamente com
+`<html data-theme="dark">`. Para forçar o tema claro, use
+`<html data-theme="light">`.
+
+As variáveis agrupam cores, tipografia, espaçamentos, raios, sombras e
+dimensões de layout. Para aplicar uma identidade visual, altere os valores
+nesse arquivo em vez de substituir valores nos componentes.
+
 ## Variáveis de ambiente
 
 Copie `.env.example` para `.env.local` e ajuste os valores para o ambiente local. O arquivo de exemplo não contém credenciais.
