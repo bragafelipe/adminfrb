@@ -1,14 +1,11 @@
 import { useBrandNavigation } from '@/features/brand'
+import { NavLink } from 'react-router-dom'
 
 interface NavigationProps {
-  currentPath?: string
   className?: string
 }
 
-export function Navigation({
-  currentPath = '#',
-  className = '',
-}: NavigationProps) {
+export function Navigation({ className = '' }: NavigationProps) {
   const items = useBrandNavigation()
 
   return (
@@ -17,23 +14,36 @@ export function Navigation({
       aria-label="Navegação Principal"
     >
       {items.map((item) => {
-        const isActive =
-          item.href === currentPath ||
-          (currentPath === '#' && item.href === '#')
+        if (item.external) {
+          return (
+            <a
+              key={item.id}
+              href={item.href}
+              target={item.target ?? '_blank'}
+              rel="noopener noreferrer"
+              className="nav-item"
+            >
+              <span>{item.label}</span>
+              {item.badge !== undefined && (
+                <span className="nav-item__badge">{item.badge}</span>
+              )}
+            </a>
+          )
+        }
+
         return (
-          <a
+          <NavLink
             key={item.id}
-            href={item.href}
-            target={item.target ?? (item.external ? '_blank' : undefined)}
-            rel={item.external ? 'noopener noreferrer' : undefined}
-            className={`nav-item ${isActive ? 'nav-item--active' : ''}`}
-            aria-current={isActive ? 'page' : undefined}
+            to={item.href}
+            className={({ isActive }) =>
+              `nav-item ${isActive ? 'nav-item--active' : ''}`
+            }
           >
             <span>{item.label}</span>
             {item.badge !== undefined && (
               <span className="nav-item__badge">{item.badge}</span>
             )}
-          </a>
+          </NavLink>
         )
       })}
     </nav>
