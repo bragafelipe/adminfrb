@@ -1,0 +1,36 @@
+.page-shell {
+  max-width: var(--layout-content-max);
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-6);
+}
+
+.page-shell__header h1 {
+  margin: 0 0 var(--space-2);
+  font-size: clamp(
+    var(--font-size-heading-min),
+    var(--font-size-heading-fluid),
+    var(--font-size-heading-max)
+  );
+}
+
+.page-shell__header p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.page-shell__card {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.page-shell__card h2 {
+  margin-top: 0;
+}
+
+.page-shell__card p {
+  color: var(--color-text-muted);
+}

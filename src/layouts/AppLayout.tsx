@@ -1,16 +1,14 @@
-import type { ReactNode } from 'react'
 import { Footer, Header } from '@/components'
+import { Outlet } from 'react-router-dom'
 import '@/styles/layout.css'
 
-interface AppLayoutProps {
-  children: ReactNode
-}
-
-export function AppLayout({ children }: AppLayoutProps) {
+export function AppLayout() {
   return (
     <div className="layout">
       <Header />
-      <main className="layout__main">{children}</main>
+      <main className="layout__main">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   )

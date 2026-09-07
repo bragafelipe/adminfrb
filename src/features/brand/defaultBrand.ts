@@ -42,17 +42,17 @@ export const defaultBrandConfig: ClientConfig = {
     {
       id: 'overview',
       label: 'Visão Geral',
-      href: '#',
+      href: '/',
     },
     {
       id: 'users',
       label: 'Usuários',
-      href: '#users',
+      href: '/users',
     },
     {
       id: 'settings',
       label: 'Configurações',
-      href: '#settings',
+      href: '/settings',
     },
     {
       id: 'support',

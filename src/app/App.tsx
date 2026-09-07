@@ -1,13 +1,14 @@
 import { BrandProvider } from '@/features/brand'
-import { AppLayout } from '@/layouts'
-import { DashboardPage } from '@/pages/DashboardPage'
+import { AuthProvider } from '@/features/auth'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes'
 
 export function App() {
   return (
     <BrandProvider>
-      <AppLayout>
-        <DashboardPage />
-      </AppLayout>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </BrandProvider>
   )
 }

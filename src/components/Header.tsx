@@ -1,4 +1,5 @@
 import { useBrand } from '@/features/brand'
+import { Link } from 'react-router-dom'
 import { BrandLogo } from './BrandLogo'
 import { Navigation } from './Navigation'
 
@@ -8,7 +9,7 @@ export function Header() {
   return (
     <header className="layout__header">
       <div className="layout__header-inner">
-        <a href="#" className="brand-badge" aria-label={brand.companyName}>
+        <Link to="/" className="brand-badge" aria-label={brand.companyName}>
           <BrandLogo logo={brand.logo} />
           <div className="brand-badge__info">
             <span className="brand-badge__name">{brand.companyName}</span>
@@ -16,7 +17,7 @@ export function Header() {
               <span className="brand-badge__tagline">{brand.tagline}</span>
             )}
           </div>
-        </a>
+        </Link>
 
         <Navigation />
 
