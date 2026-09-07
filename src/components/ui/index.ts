@@ -2,6 +2,12 @@ export { Badge } from './Badge'
 export type { BadgeProps, BadgeSize, BadgeVariant } from './Badge'
 export { Alert } from './Alert'
 export type { AlertProps, FeedbackVariant } from './Alert'
+export { AdminTable } from './AdminTable'
+export type {
+  AdminTableColumn,
+  AdminTablePagination,
+  AdminTableProps,
+} from './AdminTable'
 export { Button } from './Button'
 export type { ButtonProps, ButtonSize, ButtonVariant } from './Button'
 export { Checkbox } from './Checkbox'
