@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom'
 
 interface NavigationProps {
   className?: string
+  onNavigate?: () => void
 }
 
-export function Navigation({ className = '' }: NavigationProps) {
+export function Navigation({ className = '', onNavigate }: NavigationProps) {
   const items = useBrandNavigation()
 
   return (
@@ -22,6 +23,7 @@ export function Navigation({ className = '' }: NavigationProps) {
               target={item.target ?? '_blank'}
               rel="noopener noreferrer"
               className="nav-item"
+              onClick={onNavigate}
             >
               <span>{item.label}</span>
               {item.badge !== undefined && (
@@ -35,9 +37,11 @@ export function Navigation({ className = '' }: NavigationProps) {
           <NavLink
             key={item.id}
             to={item.href}
+            end={item.href === '/'}
             className={({ isActive }) =>
               `nav-item ${isActive ? 'nav-item--active' : ''}`
             }
+            onClick={onNavigate}
           >
             <span>{item.label}</span>
             {item.badge !== undefined && (
