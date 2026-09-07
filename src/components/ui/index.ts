@@ -20,6 +20,16 @@ export { ConfirmDialog } from './ConfirmDialog'
 export type { ConfirmDialogProps } from './ConfirmDialog'
 export { EmptyState } from './EmptyState'
 export type { EmptyStateProps } from './EmptyState'
+export { BarChart, ChartLegend, DonutChart, LineChart, PieChart } from './Charts'
+export type {
+  BarChartProps,
+  BaseChartProps,
+  ChartDatum,
+  ChartSeries,
+  DonutChartProps,
+  DonutChartSegment,
+  LineChartProps,
+} from './Charts'
 export { formatCurrency, formatNumber, formatPercent } from './formatters'
 export {
   FilterBar,

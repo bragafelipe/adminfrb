@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import {
   Badge,
+  BarChart,
   Button,
   Card,
   Checkbox,
+  DonutChart,
   formatCurrency,
   formatPercent,
+  LineChart,
   MetricCard,
   Select,
   Switch,
@@ -22,6 +25,22 @@ export function DashboardPage() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
   const [marketingConsent, setMarketingConsent] = useState(false)
   const [profile, setProfile] = useState('admin')
+
+  const salesTrend = [
+    { label: 'Jan', vendas: 30, metas: 22 },
+    { label: 'Fev', vendas: 42, metas: 34 },
+    { label: 'Mar', vendas: 38, metas: 36 },
+    { label: 'Abr', vendas: 61, metas: 48 },
+    { label: 'Mai', vendas: 58, metas: 52 },
+    { label: 'Jun', vendas: 74, metas: 60 },
+  ]
+
+  const acquisitionMix = [
+    { label: 'Orgânico', value: 44, color: 'var(--color-accent)' },
+    { label: 'Pago', value: 31, color: 'var(--color-success)' },
+    { label: 'Parceria', value: 18, color: 'var(--color-warning)' },
+    { label: 'Indireto', value: 7, color: 'var(--color-info)' },
+  ]
 
   return (
     <div className="dashboard">
@@ -80,6 +99,44 @@ export function DashboardPage() {
             icon="⏱️"
           />
         </div>
+      </section>
+
+      <section className="dashboard__charts" aria-label="Visões gráficas">
+        <LineChart
+          title="Vendas por mês"
+          description="Comparativo entre faturamento real e meta planejada"
+          data={salesTrend}
+          series={[
+            { key: 'vendas', label: 'Vendas' },
+            { key: 'metas', label: 'Meta', color: 'var(--color-success)' },
+          ]}
+          legend
+          ariaLabel="Linha de vendas por mês"
+        />
+        <BarChart
+          title="Ativações por canal"
+          description="Volume semanal consolidado por origem"
+          data={[
+            { label: 'Seg', prod: 18, suporte: 10 },
+            { label: 'Ter', prod: 27, suporte: 14 },
+            { label: 'Qua', prod: 26, suporte: 17 },
+            { label: 'Qui', prod: 35, suporte: 16 },
+            { label: 'Sex', prod: 41, suporte: 20 },
+          ]}
+          series={[
+            { key: 'prod', label: 'Produtos' },
+            { key: 'suporte', label: 'Suporte', color: 'var(--color-success)' },
+          ]}
+          legend
+          ariaLabel="Barra de ativações por canal"
+        />
+        <DonutChart
+          title="Mix de aquisição"
+          description="Participação por canal de aquisição"
+          data={acquisitionMix}
+          totalLabel="Leads"
+          ariaLabel="Gráfico de rosca do mix de aquisição"
+        />
       </section>
 
       <section

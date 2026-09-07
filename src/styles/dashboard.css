@@ -63,6 +63,21 @@
   gap: var(--space-5);
 }
 
+.dashboard__charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-6);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.dashboard__charts > * {
+  min-width: 0;
+}
+
 .dashboard__status {
   width: var(--space-3);
   height: var(--space-3);
