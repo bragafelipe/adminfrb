@@ -2,11 +2,16 @@ import { useState } from 'react'
 import {
   Badge,
   Button,
+  Card,
   Checkbox,
+  formatCurrency,
+  formatPercent,
+  MetricCard,
   Select,
   Switch,
   TextField,
   Tooltip,
+  TrendWidget,
 } from '@/components'
 import { useBrand, useBrandSupport } from '@/features/brand'
 import '@/styles/dashboard.css'
@@ -34,6 +39,46 @@ export function DashboardPage() {
         <div>
           <strong>Aplicação configurada</strong>
           <p>React, TypeScript e Vite estão prontos para uso.</p>
+        </div>
+      </section>
+
+      <section className="dashboard__metrics" aria-label="Métricas principais">
+        <h2>Métricas do Dashboard</h2>
+        <div className="dashboard__metrics-grid">
+          <MetricCard
+            title="Faturamento Mensal"
+            value={145800}
+            formatValue={(val) => formatCurrency(Number(val))}
+            trend="positive"
+            trendValue={12.4}
+            period="vs. mês anterior"
+            icon="💰"
+          />
+          <MetricCard
+            title="Novos Usuários"
+            value={1240}
+            trend="positive"
+            trendValue={5.8}
+            period="últimos 30 dias"
+            icon="👤"
+          />
+          <MetricCard
+            title="Taxa de Cancelamento"
+            value={2.1}
+            formatValue={(val) => formatPercent(Number(val))}
+            trend="negative"
+            trendValue={-0.4}
+            period="vs. mês anterior"
+            icon="📉"
+          />
+          <MetricCard
+            title="Atendimentos Pendentes"
+            value={18}
+            trend="neutral"
+            trendValue={0}
+            period="sem alteração"
+            icon="⏱️"
+          />
         </div>
       </section>
 
@@ -123,6 +168,38 @@ export function DashboardPage() {
                 Dica de uso
               </Button>
             </Tooltip>
+          </div>
+
+          <div className="design-system-demo__panel">
+            <h3>Widgets de Tendência</h3>
+            <div className="design-system-demo__badges">
+              <TrendWidget trend="positive" value={15.2} label="vs mês ant." />
+              <TrendWidget trend="negative" value={-3.4} />
+              <TrendWidget trend="neutral" value={0} />
+              <TrendWidget trend="positive" loading />
+            </div>
+          </div>
+
+          <div
+            className="design-system-demo__panel"
+            style={{ gridColumn: 'span 2' }}
+          >
+            <h3>Card Genérico</h3>
+            <Card
+              title="Resumo Operacional"
+              description="Visão das atividades recentes no sistema."
+              actions={
+                <Button size="sm" variant="secondary">
+                  Atualizar
+                </Button>
+              }
+              footer={<span>Atualizado há 5 minutos</span>}
+            >
+              <p style={{ margin: 0 }}>
+                Todos os serviços operando normalmente. Nenhum incidente
+                registrado.
+              </p>
+            </Card>
           </div>
         </div>
       </section>
