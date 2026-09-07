@@ -1,4 +1,12 @@
-import { AdminTable, type AdminTableColumn } from '../components/ui'
+import { useMemo, useState } from 'react'
+import {
+  ActionBar,
+  AdminTable,
+  Button,
+  ListFilters,
+  type AdminTableColumn,
+  type ListFiltersValue,
+} from '../components/ui'
 import { PageShell } from './PageShell'
 
 interface UserRow {
@@ -30,18 +38,64 @@ const users: UserRow[] = [
   },
 ]
 
+const defaultFilters: ListFiltersValue = {
+  search: '',
+  role: 'all',
+  status: 'all',
+  period: 'all',
+}
+
 export function UsersPage() {
+  const [filters, setFilters] = useState<ListFiltersValue>(defaultFilters)
+
+  const filteredUsers = useMemo(() => {
+    const search = filters.search?.trim().toLowerCase() ?? ''
+    const role = filters.role ?? 'all'
+    const status = filters.status ?? 'all'
+
+    return users.filter((user) => {
+      const matchesSearch =
+        !search ||
+        user.name.toLowerCase().includes(search) ||
+        user.email.toLowerCase().includes(search)
+
+      const matchesRole = role === 'all' || user.role.toLowerCase() === role.toLowerCase()
+      const matchesStatus =
+        status === 'all' || user.status.toLowerCase() === status.toLowerCase()
+
+      return matchesSearch && matchesRole && matchesStatus
+    })
+  }, [filters])
+
   return (
     <PageShell
       title="Usuários"
       description="Gerencie os usuários e os acessos da aplicação."
     >
+      <ActionBar
+        title="Ações"
+        description="Atualize a lista, aplique filtros ou cadastre um novo membro."
+        primaryAction={
+          <Button type="button" variant="primary">
+            Adicionar usuário
+          </Button>
+        }
+      />
+
+      <ListFilters
+        value={filters}
+        onChange={setFilters}
+        onApply={setFilters}
+        onClear={() => setFilters(defaultFilters)}
+        syncToUrl
+      />
+
       <section className="page-shell__card" aria-label="Lista de usuários">
         <h2>Usuários cadastrados</h2>
         <AdminTable
           ariaLabel="Usuários cadastrados"
           columns={columns}
-          data={users}
+          data={filteredUsers}
           getRowId={(user) => user.email}
           actions={(user) => (
             <button type="button" aria-label={`Editar ${user.name}`}>
