@@ -1,3 +1,4 @@
+import { Button } from '@/components'
 import { useAuth } from '@/features/auth'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { PageShell } from './PageShell'
@@ -15,15 +16,14 @@ export function LoginPage() {
   return (
     <PageShell title="Entrar" description="Acesse o dashboard administrativo.">
       <section className="page-shell__card">
-        <button
-          type="button"
+        <Button
           onClick={() => {
             login()
             navigate(destination, { replace: true })
           }}
         >
           Entrar na aplicação
-        </button>
+        </Button>
       </section>
     </PageShell>
   )
