@@ -57,6 +57,30 @@
   font-size: 1.25rem;
 }
 
+.dashboard__section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.dashboard__section-header p {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+}
+
+.dashboard__controls {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.dashboard__controls .ui-field {
+  min-width: 11rem;
+}
+
 .dashboard__metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
@@ -75,6 +99,10 @@
 }
 
 .dashboard__charts > * {
+  min-width: 0;
+}
+
+.dashboard__activity {
   min-width: 0;
 }
 
@@ -151,4 +179,19 @@
 
 .design-system-demo__panel .ui-field {
   width: 100%;
+}
+
+@media (max-width: 40rem) {
+  .dashboard {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .dashboard__controls,
+  .dashboard__controls > * {
+    width: 100%;
+  }
+
+  .dashboard__controls .ui-field {
+    min-width: 0;
+  }
 }
