@@ -59,7 +59,8 @@ export function UsersPage() {
         user.name.toLowerCase().includes(search) ||
         user.email.toLowerCase().includes(search)
 
-      const matchesRole = role === 'all' || user.role.toLowerCase() === role.toLowerCase()
+      const matchesRole =
+        role === 'all' || user.role.toLowerCase() === role.toLowerCase()
       const matchesStatus =
         status === 'all' || user.status.toLowerCase() === status.toLowerCase()
 

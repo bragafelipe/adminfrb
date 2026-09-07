@@ -39,7 +39,14 @@ export interface ListFiltersProps {
   actions?: ReactNode
 }
 
-const searchParamKeys = ['search', 'role', 'status', 'period', 'startDate', 'endDate']
+const searchParamKeys = [
+  'search',
+  'role',
+  'status',
+  'period',
+  'startDate',
+  'endDate',
+]
 
 export function ListFilters({
   actions,
@@ -59,7 +66,11 @@ export function ListFilters({
 
     for (const key of searchParamKeys) {
       const nextValue = value?.[key]
-      merged[key] = nextValue ?? (key === 'search' || key === 'startDate' || key === 'endDate' ? '' : 'all')
+      merged[key] =
+        nextValue ??
+        (key === 'search' || key === 'startDate' || key === 'endDate'
+          ? ''
+          : 'all')
     }
 
     for (const field of fields) {
@@ -124,7 +135,10 @@ export function ListFilters({
   const handleClear = () => {
     const cleared: ListFiltersValue = {}
     for (const key of searchParamKeys) {
-      cleared[key] = key === 'search' || key === 'startDate' || key === 'endDate' ? '' : 'all'
+      cleared[key] =
+        key === 'search' || key === 'startDate' || key === 'endDate'
+          ? ''
+          : 'all'
     }
     for (const field of fields) {
       cleared[field.key] = field.value ?? ''
@@ -187,7 +201,9 @@ export function ListFilters({
                   aria-label={field.label ?? 'Buscar'}
                   label={field.label ?? 'Buscar'}
                   name={field.key}
-                  onChange={(event) => handleValueChange(field.key, event.target.value)}
+                  onChange={(event) =>
+                    handleValueChange(field.key, event.target.value)
+                  }
                   placeholder={field.placeholder ?? 'Buscar'}
                   value={state[field.key] ?? ''}
                 />
@@ -201,7 +217,9 @@ export function ListFilters({
                 <TextField
                   label={field.label ?? 'Data'}
                   name={field.key}
-                  onChange={(event) => handleValueChange(field.key, event.target.value)}
+                  onChange={(event) =>
+                    handleValueChange(field.key, event.target.value)
+                  }
                   type="date"
                   value={state[field.key] ?? ''}
                 />
@@ -214,7 +232,9 @@ export function ListFilters({
               <Select
                 label={field.label ?? field.key}
                 name={field.key}
-                onChange={(event) => handleValueChange(field.key, event.target.value)}
+                onChange={(event) =>
+                  handleValueChange(field.key, event.target.value)
+                }
                 options={field.options ?? [{ value: 'all', label: 'Todos' }]}
                 value={state[field.key] ?? field.options?.[0]?.value ?? 'all'}
               />
@@ -228,7 +248,12 @@ export function ListFilters({
         {onClear || onApply ? (
           <>
             {onClear ? (
-              <Button onClick={handleClear} size="sm" type="button" variant="secondary">
+              <Button
+                onClick={handleClear}
+                size="sm"
+                type="button"
+                variant="secondary"
+              >
                 {clearLabel}
               </Button>
             ) : null}
