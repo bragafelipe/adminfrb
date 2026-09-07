@@ -574,3 +574,126 @@
   opacity: 1;
   transform: translate(0, -50%);
 }
+
+.ui-admin-table {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.ui-admin-table__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.ui-admin-table table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+}
+
+.ui-admin-table th,
+.ui-admin-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.ui-admin-table th {
+  background: var(--color-background);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ui-admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.ui-admin-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+
+.ui-admin-table__sort:focus-visible,
+.ui-admin-table input:focus-visible,
+.ui-admin-table__pagination button:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.ui-admin-table__selection {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.ui-admin-table__selection input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-accent);
+}
+
+.ui-admin-table__actions {
+  white-space: nowrap;
+}
+
+.ui-admin-table__message {
+  padding: var(--space-8);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.ui-admin-table__message p {
+  margin: 0 0 var(--space-3);
+}
+
+.ui-admin-table__message button,
+.ui-admin-table__pagination button {
+  min-height: 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.5rem 0.875rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+
+.ui-admin-table__message button:disabled,
+.ui-admin-table__pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ui-admin-table__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 40rem) {
+  .ui-admin-table th,
+  .ui-admin-table td {
+    padding: var(--space-3);
+  }
+
+  .ui-admin-table__pagination {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
