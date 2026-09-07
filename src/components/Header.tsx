@@ -1,27 +1,42 @@
 import { useBrand } from '@/features/brand'
-import { Link } from 'react-router-dom'
-import { BrandLogo } from './BrandLogo'
-import { Navigation } from './Navigation'
 
-export function Header() {
+interface HeaderProps {
+  onMenuToggle: () => void
+}
+
+export function Header({ onMenuToggle }: HeaderProps) {
   const { brand, availableBrands, setBrand } = useBrand()
 
   return (
     <header className="layout__header">
       <div className="layout__header-inner">
-        <Link to="/" className="brand-badge" aria-label={brand.companyName}>
-          <BrandLogo logo={brand.logo} />
-          <div className="brand-badge__info">
-            <span className="brand-badge__name">{brand.companyName}</span>
-            {brand.tagline && (
-              <span className="brand-badge__tagline">{brand.tagline}</span>
-            )}
-          </div>
-        </Link>
-
-        <Navigation />
+        <button
+          className="mobile-menu-toggle"
+          type="button"
+          onClick={onMenuToggle}
+          aria-label="Abrir menu de navegação"
+        >
+          <span aria-hidden="true">☰</span>
+        </button>
 
         <div className="layout__actions">
+          <button
+            className="header-action"
+            type="button"
+            aria-label="Notificações"
+            title="Notificações"
+          >
+            <span aria-hidden="true">♢</span>
+          </button>
+          <button
+            className="header-action header-action--user"
+            type="button"
+            aria-label="Menu do usuário"
+            aria-haspopup="menu"
+          >
+            <span aria-hidden="true">●</span>
+            <span className="header-action__label">Minha conta</span>
+          </button>
           {availableBrands.length > 1 && (
             <label className="brand-selector">
               <span>Marca:</span>
