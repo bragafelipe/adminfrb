@@ -780,3 +780,209 @@
     flex-wrap: wrap;
   }
 }
+
+.ui-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.ui-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6) var(--space-3);
+}
+
+.ui-card__header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ui-card__title h3,
+.ui-card__title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.ui-card__description p,
+.ui-card__description {
+  margin: var(--space-1) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.ui-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.ui-card__body {
+  flex: 1;
+  padding: var(--space-5) var(--space-6);
+}
+
+.ui-card__header + .ui-card__body {
+  padding-top: var(--space-2);
+}
+
+.ui-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background: rgb(0 0 0 / 1.5%);
+  font-size: 0.85rem;
+}
+
+.ui-card__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+}
+
+.ui-trend-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-radius: 999px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.ui-trend-widget--sm {
+  padding: 0.15rem 0.45rem;
+  font-size: 0.75rem;
+}
+
+.ui-trend-widget--md {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.ui-trend-widget--lg {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.ui-trend-widget--positive {
+  background: var(--color-success-surface);
+  color: var(--color-success);
+}
+
+.ui-trend-widget--negative {
+  background: var(--color-danger-surface);
+  color: var(--color-danger);
+}
+
+.ui-trend-widget--neutral {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.ui-trend-widget__icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.ui-trend-widget__icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-trend-widget__label {
+  font-weight: normal;
+  color: var(--color-text-muted);
+  margin-left: 0.2rem;
+}
+
+.ui-metric-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  gap: var(--space-3);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.ui-metric-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.ui-metric-card__title {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ui-metric-card__header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ui-metric-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: var(--color-info-surface);
+  color: var(--color-accent);
+  font-size: 1.1rem;
+}
+
+.ui-metric-card__body {
+  margin: var(--space-1) 0;
+}
+
+.ui-metric-card__value {
+  font-size: 1.85rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.ui-metric-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  font-size: 0.825rem;
+}
+
+.ui-metric-card__period {
+  color: var(--color-text-muted);
+}
