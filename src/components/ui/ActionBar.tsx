@@ -43,4 +43,5 @@ export function ActionBar({
 }
 
 export const ListActionBar = ActionBar
+export const ActionToolbar = ActionBar
 export const Toolbar = ActionBar

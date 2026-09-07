@@ -246,4 +246,5 @@ export function ListFilters({
 
 export const FilterBar = ListFilters
 export const FiltersBar = ListFilters
+export const ListFilterBar = ListFilters
 export const SearchFilters = ListFilters

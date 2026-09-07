@@ -2,7 +2,7 @@ export { Badge } from './Badge'
 export type { BadgeProps, BadgeSize, BadgeVariant } from './Badge'
 export { Alert } from './Alert'
 export type { AlertProps, FeedbackVariant } from './Alert'
-export { ActionBar, ListActionBar, Toolbar } from './ActionBar'
+export { ActionBar, ActionToolbar, ListActionBar, Toolbar } from './ActionBar'
 export type { ActionBarProps } from './ActionBar'
 export { AdminTable } from './AdminTable'
 export type {
@@ -18,7 +18,13 @@ export { ConfirmDialog } from './ConfirmDialog'
 export type { ConfirmDialogProps } from './ConfirmDialog'
 export { EmptyState } from './EmptyState'
 export type { EmptyStateProps } from './EmptyState'
-export { FilterBar, FiltersBar, ListFilters, SearchFilters } from './ListFilters'
+export {
+  FilterBar,
+  FiltersBar,
+  ListFilterBar,
+  ListFilters,
+  SearchFilters,
+} from './ListFilters'
 export type {
   ListFilterValue,
   ListFiltersField,
