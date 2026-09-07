@@ -7,8 +7,15 @@
   --color-text-muted: #5d687d;
   --color-border: #e0e6f0;
   --color-accent: #4968d8;
+  --color-focus-ring: rgb(73 104 216 / 28%);
   --color-success: #197a50;
   --color-success-surface: #dff5eb;
+  --color-warning: #d97706;
+  --color-warning-surface: #fff7ed;
+  --color-danger: #b42318;
+  --color-danger-surface: #fef3f2;
+  --color-info: #2563eb;
+  --color-info-surface: #eef4ff;
 
   --font-family-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   --font-size-body: 1rem;
@@ -25,6 +32,7 @@
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-24: 6rem;
