@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  AdminTable,
   Badge,
   BarChart,
   Button,
@@ -17,6 +18,11 @@ import {
   TrendWidget,
 } from '@/components'
 import { useBrand, useBrandSupport } from '@/features/brand'
+import {
+  getDashboardData,
+  type DashboardActivity,
+  type DashboardPeriod,
+} from '@/mocks/dashboard'
 import '@/styles/dashboard.css'
 
 export function DashboardPage() {
@@ -25,22 +31,13 @@ export function DashboardPage() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true)
   const [marketingConsent, setMarketingConsent] = useState(false)
   const [profile, setProfile] = useState('admin')
-
-  const salesTrend = [
-    { label: 'Jan', vendas: 30, metas: 22 },
-    { label: 'Fev', vendas: 42, metas: 34 },
-    { label: 'Mar', vendas: 38, metas: 36 },
-    { label: 'Abr', vendas: 61, metas: 48 },
-    { label: 'Mai', vendas: 58, metas: 52 },
-    { label: 'Jun', vendas: 74, metas: 60 },
-  ]
-
-  const acquisitionMix = [
-    { label: 'Orgânico', value: 44, color: 'var(--color-accent)' },
-    { label: 'Pago', value: 31, color: 'var(--color-success)' },
-    { label: 'Parceria', value: 18, color: 'var(--color-warning)' },
-    { label: 'Indireto', value: 7, color: 'var(--color-info)' },
-  ]
+  const [period, setPeriod] = useState<DashboardPeriod>('30d')
+  const [isLoading, setIsLoading] = useState(false)
+  const [showEmptyState, setShowEmptyState] = useState(false)
+  const dashboardData = getDashboardData(period)
+  const visibleData = showEmptyState
+    ? { ...dashboardData, salesTrend: [], acquisitionMix: [], activities: [] }
+    : dashboardData
 
   return (
     <div className="dashboard">
@@ -62,41 +59,80 @@ export function DashboardPage() {
       </section>
 
       <section className="dashboard__metrics" aria-label="Métricas principais">
-        <h2>Métricas do Dashboard</h2>
+        <div className="dashboard__section-header">
+          <div>
+            <h2>Métricas do Dashboard</h2>
+            <p>Dados simulados para acompanhar a operação.</p>
+          </div>
+          <div className="dashboard__controls">
+            <Select
+              label="Período"
+              value={period}
+              onChange={(event) =>
+                setPeriod(event.target.value as DashboardPeriod)
+              }
+              options={[
+                { value: '7d', label: 'Últimos 7 dias' },
+                { value: '30d', label: 'Últimos 30 dias' },
+                { value: '90d', label: 'Últimos 90 dias' },
+              ]}
+            />
+            <Button
+              size="sm"
+              variant="secondary"
+              aria-pressed={isLoading}
+              onClick={() => setIsLoading((loading) => !loading)}
+            >
+              {isLoading ? 'Exibir dados' : 'Visualizar carregamento'}
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              aria-pressed={showEmptyState}
+              onClick={() => setShowEmptyState((empty) => !empty)}
+            >
+              {showEmptyState ? 'Exibir dados' : 'Visualizar vazio'}
+            </Button>
+          </div>
+        </div>
         <div className="dashboard__metrics-grid">
           <MetricCard
             title="Faturamento Mensal"
-            value={145800}
+            value={dashboardData.metrics.revenue}
             formatValue={(val) => formatCurrency(Number(val))}
             trend="positive"
             trendValue={12.4}
             period="vs. mês anterior"
             icon="💰"
+            loading={isLoading}
           />
           <MetricCard
             title="Novos Usuários"
-            value={1240}
+            value={dashboardData.metrics.users}
             trend="positive"
             trendValue={5.8}
             period="últimos 30 dias"
             icon="👤"
+            loading={isLoading}
           />
           <MetricCard
             title="Taxa de Cancelamento"
-            value={2.1}
+            value={dashboardData.metrics.churn}
             formatValue={(val) => formatPercent(Number(val))}
             trend="negative"
             trendValue={-0.4}
             period="vs. mês anterior"
             icon="📉"
+            loading={isLoading}
           />
           <MetricCard
             title="Atendimentos Pendentes"
-            value={18}
+            value={dashboardData.metrics.pending}
             trend="neutral"
             trendValue={0}
             period="sem alteração"
             icon="⏱️"
+            loading={isLoading}
           />
         </div>
       </section>
@@ -105,39 +141,86 @@ export function DashboardPage() {
         <LineChart
           title="Vendas por mês"
           description="Comparativo entre faturamento real e meta planejada"
-          data={salesTrend}
+          data={visibleData.salesTrend.map(({ label, sales, goal }) => ({
+            label,
+            vendas: sales,
+            metas: goal,
+          }))}
           series={[
             { key: 'vendas', label: 'Vendas' },
             { key: 'metas', label: 'Meta', color: 'var(--color-success)' },
           ]}
           legend
           ariaLabel="Linha de vendas por mês"
+          loading={isLoading}
+          emptyTitle="Nenhuma venda no período"
+          emptyDescription="Altere o filtro ou aguarde novos dados."
         />
         <BarChart
           title="Ativações por canal"
           description="Volume semanal consolidado por origem"
-          data={[
-            { label: 'Seg', prod: 18, suporte: 10 },
-            { label: 'Ter', prod: 27, suporte: 14 },
-            { label: 'Qua', prod: 26, suporte: 17 },
-            { label: 'Qui', prod: 35, suporte: 16 },
-            { label: 'Sex', prod: 41, suporte: 20 },
-          ]}
+          data={visibleData.salesTrend.map(({ label, sales, goal }) => ({
+            label,
+            prod: sales,
+            suporte: goal,
+          }))}
           series={[
             { key: 'prod', label: 'Produtos' },
             { key: 'suporte', label: 'Suporte', color: 'var(--color-success)' },
           ]}
           legend
           ariaLabel="Barra de ativações por canal"
+          loading={isLoading}
+          emptyTitle="Nenhuma ativação no período"
+          emptyDescription="Altere o filtro ou aguarde novos dados."
         />
         <DonutChart
           title="Mix de aquisição"
           description="Participação por canal de aquisição"
-          data={acquisitionMix}
+          data={visibleData.acquisitionMix}
           totalLabel="Leads"
           ariaLabel="Gráfico de rosca do mix de aquisição"
+          loading={isLoading}
+          emptyTitle="Nenhuma aquisição no período"
+          emptyDescription="Altere o filtro ou aguarde novos dados."
         />
       </section>
+
+      <Card
+        title="Atividades recentes"
+        description="Acompanhe as últimas movimentações da sua operação."
+        className="dashboard__activity"
+      >
+        <AdminTable<DashboardActivity>
+          ariaLabel="Tabela de atividades recentes"
+          data={visibleData.activities}
+          loading={isLoading}
+          emptyMessage="Nenhuma atividade encontrada neste período."
+          getRowId={(row) => row.id}
+          columns={[
+            { key: 'activity', header: 'Atividade' },
+            { key: 'user', header: 'Responsável' },
+            {
+              key: 'status',
+              header: 'Status',
+              render: (value) => (
+                <Badge
+                  variant={
+                    value === 'Concluída'
+                      ? 'success'
+                      : value === 'Pendente'
+                        ? 'warning'
+                        : 'info'
+                  }
+                >
+                  {String(value)}
+                </Badge>
+              ),
+            },
+            { key: 'date', header: 'Data' },
+          ]}
+        />
+      </Card>
 
       <section
         className="design-system-demo"
